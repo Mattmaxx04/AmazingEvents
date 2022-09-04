@@ -15,8 +15,10 @@
 </head>
 
 <body>
+    <!--------------------------HEADER----------------------------------->
+
   <header>
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
         <div class="logo">
           <img src="./assets/logo_Amazing_Events.png" alt="logo" width="80" height="24">
@@ -28,7 +30,7 @@
         <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
           <ul class="navbar-nav m-1 me-1">
             <li class="nav-item">
-              <a class="nav-link "  href="./index.html">Home</a>
+              <a class="nav-link" href="./index.html">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">Upcoming Events</a>
@@ -48,53 +50,28 @@
       </div>
     </nav>
   </header>
+
+  <!--------------------------MAIN----------------------------------->
   <main class="container-fluid">
+  <!--------------------------CAROUSEL----------------------------------->
 
-    <div class="container">
-      <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active slide">
+          <img src="./assets/banner1.jpg" class="d-block w-100 slide" alt="...">
         </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="./assets/cine7.jpg" class="d-block w-100 img-fluid" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Upcoming Events</h5>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="./assets/concierto_de_musica1.jpg" class="d-block w-100 img-fluid" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Upcoming Events</h5>
-
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="./assets/fiesta_de_disfraces1.jpg" class="d-block w-100 img-fluid" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Upcoming Events</h5>
-
-            </div>
-          </div>
+        <div class="carousel-item slide">
+          <img src="./assets/banner2.jpg" class="d-block w-100 slide" alt="...">
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden"></span>
-        </button>
+        <div class="carousel-item slide">
+          <img src="./assets/banner3.png" class="d-block w-100 slide" alt="...">
+        </div>
       </div>
     </div>
-    <section class="section__form">
+  <!--------------------------section----------------------------------->
+    <section class="container-fluid">
+        <!--------------------------form----------------------------------->
+    <article class="article__form">
 
       <form class="d-flex">
         <fieldset>
@@ -115,15 +92,12 @@
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </div>
-        
-
-      </form>
-
-    </section>
-
-    <section class="container cards">
-      <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
+       </form>
+    </article>
+  <!--------------------------cards----------------------------------->
+    <article class="cards row">
+      <div class="card col-xl-3 col-md-5 col-sd-10">
+        <img src="./assets/concierto_de_musica1.jpg" class="card-img-top card__img" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
@@ -131,8 +105,8 @@
             <a href="./details.html" class="btn btn-primary">More info</a>
         </div>
       </div>
-      <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
+      <div class="card col-xl-3 col-md-5 col-sd-10" >
+        <img src="./assets/salida_al_museo5.jpg" class="card-img-top card__img" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
@@ -140,8 +114,8 @@
             <a href="./details.html" class="btn btn-primary">More info</a>
         </div>
       </div>
-      <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
+      <div class="card col-xl-3 col-md-5 col-sd-10" >
+        <img src="./assets/feria_de_comidas7.jpg" class="card-img-top card__img" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
@@ -149,19 +123,20 @@
             <a href="./details.html" class="btn btn-primary">More info</a>
         </div>
       </div>
-      <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
+      <div class="card col-xl-3 col-md-5 col-sd-10">
+        <img src="./assets/fiesta_de_disfraces1.jpg" class="card-img-top card__img" alt="...">
         <div class="card-body">
           <h5 class="card-title">Card title</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
             content.</p>
-            <a href="./details.html" class="btn btn-primary">More info</a>
+          <a href="./details.html" class="btn btn-primary">More info</a>
         </div>
       </div>
-    </section>
+    </article>
+  </section>
 
   </main>
-  <footer>
+  <footer class="container">
     <div class="social">
       <i class="bi bi-facebook"></i>
       <i class="bi bi-whatsapp"></i>
