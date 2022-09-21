@@ -49,7 +49,7 @@
     </nav>
   </header>
 
-  <main class="container-fluid">
+  <main class="container-fluid contact__main">
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active slide">
@@ -64,36 +64,39 @@
       </div>
     </div>
 
-    <section>
-      <div class="container">
+    <section class="container-fluid contact__section">
+      <article class="contact__art">
         <form class="contact__form">
 
-          <div class="mb-3 form-check">
+          <div class="form-check">
             <label class="name" for="name">Name:</label>
             <input type="text" class="field" placeholder="Nombre" id="contact-name">
           </div>
-          <div class="mb-3">
+          <div class="form-check">
             <label for="exampleInputEmail1" class="form-label">Email address:</label>
             <input type="text" class="field" placeholder="E-mail" id="contact-email">
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
           </div>
-          <div class="mb-3">
+          <div class="form-check">
             <label for="Message" class="form-label">Message:</label>
             <textarea placeholder="Message" class="field" id="contact-message"></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-      </div>
+      </article>
     </section>
 
   </main>
 
-  <footer class="container">
+  <footer class="container flex-wrap">
     <div class="social">
       <i class="bi bi-facebook"></i>
       <i class="bi bi-whatsapp"></i>
       <i class="bi bi-instagram"></i>
     </div>
+    <p class="footer__p"><h4>Created by Matías Quiroga. Contact:<a href="mailto:matiasquiroga.04@gmail.com">
+      matiasquiroga.04@gmail.com</a>
+</h4></p>
     <h5>Cohort</h5>
   </footer>
 
