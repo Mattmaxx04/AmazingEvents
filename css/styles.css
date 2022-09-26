@@ -19,6 +19,17 @@ body {
   margin: 1rem;
 }
 
+
+main {
+  border-radius: var(--border-radius);
+  height: 70%;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color5);
+  border: 0.1rem solid var(--color1);
+}
+
 .container-fluid {
   display: flex;
   justify-content: space-evenly !important;
@@ -62,6 +73,7 @@ label {
 }
 .btn {
   margin: 1rem;
+  
 }
 .card {
   border-radius: var(--border-radius);
@@ -72,9 +84,22 @@ label {
 .card-img-top {
   padding: 0.5rem;
   width: 100%;
-  object-fit: cover !important;
-  height: 100%;
+  height: 100%!important;
   border-radius: var(--border-radius);
+}
+.card-text{
+  color: var(--color3);
+}
+.btn{
+  background-color: var(--color4);
+  color: var(--color3);
+  border: 0.1rem solid var(--color1);
+  border-radius: var(--border-radius);
+}
+.btn:hover{
+  background-color: var(--color2);
+  color: var(--color6);
+  border: 0.1rem solid var(--color1);
 }
 .slide {
   object-fit: cover;
@@ -87,15 +112,6 @@ label {
   border-radius: var(--border-radius);
 }
 
-main {
-  border-radius: var(--border-radius);
-  height: 70%;
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--color5);
-  border: 0.1rem solid var(--color1);
-}
 
 section {
   display: flex;
@@ -113,8 +129,12 @@ section {
   justify-content: space-between;
   align-items: center;
 }
+.upmain{
+  min-height: 80vh;
+}
 #checks{
   display: flex;
+  margin: 1rem;
 }
 .form-check{
   align-items: center;
@@ -181,9 +201,31 @@ input {
   padding: 0.5rem;
 }
 
+.card__image{
+  height: 50%!important;
+}
+.cards__body{
+  height:50%;
+}
+
 .details {
   width: 60vw;
-  height: 50%;
+ }
+ .detail__p{
+  margin:0.5rem;
+ }
+.main__details{
+  min-height: 70vh;
+}
+.detail__card{
+  display: flex;
+  padding: 1rem;
+
+}
+.detail__image{
+  width: 100%;
+  object-fit: cover;
+  border-radius: var(--border-radius);
 }
 .contact__art {
   background-color: var(--color6);
