@@ -1,18 +1,16 @@
 let parametrosUrl = location.search;
 let parametros = new URLSearchParams(parametrosUrl);
-let names = parametros.get("name");
-console.log(names);
+let id = parametros.get("_id");
 
-let eventoFiltrado = data.eventos.filter((evento) => {
-  return evento.name;
+let eventoFiltrado = data.events.filter((events) => {
+  return events._id;
 });
-console.log(eventoFiltrado);
 
-let eventoEncontrado = eventoFiltrado.find((evento) => evento.name == names);
+let eventoEncontrado = eventoFiltrado.find((events) => events._id == id);
 console.log(eventoEncontrado);
 showCard(eventoEncontrado);
 
-function showCard(evento) {
+function showCard(events) {
   let container = document.getElementById("details");
   container.innerHTML = "";
   let div = document.createElement("div");
@@ -22,16 +20,16 @@ function showCard(evento) {
   div.style.padding = "0.5rem";
   div.innerHTML = `<div class="detail__card">
     <div class="col-md-6">
-      <img src="${evento.image}" class="img-fluid detail__image" alt="eventimage">
+      <img src="${events.image}" class="img-fluid detail__image" alt="eventimage">
     </div>
     <div class="col-md-6">
       <div class="card-body">
-        <h5 class="card-title"> ${evento.name}</h5>
-        <p class="card-text detail__p"> ${evento.description}</p>
-        <p class="card-text detail__p">Date: ${evento.date}</p>
-        <p class="card-text detail__p">Place: ${evento.place}</p>
-        <p class="card-text detail__p">Capacity: ${evento.capacity}</p>
-        <h4 class="price">Price: $${evento.price}</p>
+        <h5 class="card-title"> ${events.name}</h5>
+        <p class="card-text detail__p"> ${events.description}</p>
+        <p class="card-text detail__p">Date: ${events.date}</p>
+        <p class="card-text detail__p">Place: ${events.place}</p>
+        <p class="card-text detail__p">Capacity: ${events.capacity}</p>
+        <h4 class="price">Price: $${events.price}</p>
       </div>
     </div>
   </div>

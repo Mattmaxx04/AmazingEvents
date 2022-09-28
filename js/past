@@ -1,6 +1,4 @@
-let url = document.title;
-/*-------------------cards-----------------*/
-let eventosFinal = [];
+let eventosFinal = []
 
 let cards = document.getElementById("cards__data");
 
@@ -21,13 +19,6 @@ function pintarCards(events) {
   });
 }
 
-function eventosUp(events) {
-  events.filter((events) => {
-    if (events.date < data.currentDate) {
-      eventosFinal.push(events);
-    }
-  });
-}
 
 function eventosPast(events) {
   events.filter((events) => {
@@ -37,6 +28,8 @@ function eventosPast(events) {
   });
 }
 
+
+/*-------------------funcion de busqueda-----------------*/
 
 let searcher = document.getElementById("searchbox");
 
@@ -55,19 +48,9 @@ function search(events){
   pintarCards(eventoFiltrado);
 }
 
-/*--------------Pintar cards en c/pagina----------
-if (url == "Home") {
-  eventosFinal = data.events;
-  pintarCards(eventosFinal);
-} else if (url == "Upcoming Events") {
-  eventosUp(data.events);
-  pintarCards(eventosFinal);
-} else if (url == "Past Events") {
-  eventosPast(data.events);
-  pintarCards(eventosFinal);
-}*/
-
-/*-------------------checks order by category-----------------*/
+eventosPast(data.events);
+pintarCards(eventosFinal)
+/*-------------------pintar checks category-----------------*/
 
 let categorys = [];
 let checks = document.getElementById("checks");
@@ -92,23 +75,85 @@ function pintarChecks(checks) {
   });
 }
 
-if (url == "Home" || url == "Past Events" || url == "Upcoming Events") {
-  pintarChecks(checks);
-}
+pintarChecks(checks);
 
-/*
+/*-------------------cards order by check category-----------------*/
 
-checks.addEventListener("click", (e)=>{
-  let checked = []
-  let checkBoxes = checks.value
-  for (let i = 0; i < checkBoxes.length; i++ ){
+let switches = document.querySelector("form")
+
+switches.addEventListener("click", ()=> filtrarPorCategoria(eventosFinal))
+
+
+function filtrarPorCategoria(eventosFinal){
+  let checkBoxes = document.querySelectorAll('input[type="checkbox"]')
+  let arrayCheckBoxes = Array.from(checkBoxes)
+  let valueCheck = arrayCheckBoxes.find(checkBox => checkBox.checked)  
+  let valueChecks = valueCheck.value
+  console.log(valueChecks)
+  let filtrados = eventosFinal.filter(valueChecks);
+  pintarCards(filtrados)
+  
+
+  } 
+
+/* let radioChecked = arrayRadioButtons.find(
+    (radioButton) => radioButton.checked
+  );
+  let valueRadio = radioChecked.value;
+  let numerosFiltrados = arrayNumeros.filter(
+    (numero) => numero % 2 == valueRadio || valueRadio == "all"
+  );
+  return numerosFiltrados;*/
+
+/*console.log(checkBoxes)
+checks.addEventListener("click", (evento)=>{filtrarPorCategoria(evento)
+  })
+
+  function filtrarPorCategoria(evento){
+    //let arrayCheckBoxes = Array.from(checkBoxes);
+    //console.log(arrayCheckBoxes)
+    console.log(checkBoxes)
+  }*/
+  //let checked = []
+  //let checkBoxes = checks.value
+  
+ /* for (let i = 0; i < checkBoxes.length; i++ ){
+   
     if (checkBoxes[i].cheked){
       checked.push(checkBoxes[i].value)
     }
-  }
+    
   console.log(checked);
-  //tengo que evaluar si al hacer click el checked cambio a true
-  //si es true, mostrar esas cards
-
+  }
 })*/
-/*-------------------search---------------*/
+/*function filtrarPorCategoria(evento) {
+    //let dataFromSwitch = evento.target.forEach(evento, ()=>{dataFromSwitch.push(evento)})
+   //let datos = evento.target[0].checked;
+   let datosCheckados = []
+   evento.target.forEach((evento), () =>{
+    if(evento.target.checked == true){
+      datosCheckados.push(evento)
+    }
+   })
+   let checked = evento.target.checked
+   //let checkBoxes = evento.forEach(evento, () =>{evento.target.checked})
+   //console.log(checkBoxes);
+   console.log(datosCheckados);
+   console.log(checked);
+    //console.log(dataFromSwitch);
+
+}
+/*
+checks.addEventListener("click", (e)=>{
+  let checked = []
+  let checkBoxes = checks.value
+  console.log(checkBoxes)
+  for (let i = 0; i < checkBoxes.length; i++ ){
+   
+    if (checkBoxes[i].cheked){
+      checked.push(checkBoxes[i].value)
+    }
+    
+  console.log(checked);
+  }
+})*/
