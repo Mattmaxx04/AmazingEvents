@@ -1,4 +1,4 @@
-let eventosFinal = []
+let eventosFinal = [];
 
 let cards = document.getElementById("cards__data");
 
@@ -19,7 +19,6 @@ function pintarCards(events) {
   });
 }
 
-
 function eventosPast(events) {
   events.filter((events) => {
     if (events.date > data.currentDate) {
@@ -28,28 +27,30 @@ function eventosPast(events) {
   });
 }
 
-
+eventosPast(data.events);
+pintarCards(eventosFinal);
 /*-------------------funcion de busqueda-----------------*/
 
 let searcher = document.getElementById("searchbox");
 
 searcher.addEventListener("keyup", () => {
-  search(eventosFinal)
+  let filtroCategoria = filtrarPorCategoria(eventosFinal);
+  let filtradoTexto = search(filtroCategoria);
+  pintarCards(filtradoTexto);
 });
 
-function search(events){
-    let palabras = searcher.value.toLowerCase();
+function search(events) {
+  let palabras = searcher.value.toLowerCase();
   let eventoFiltrado = [];
   events.filter((events) => {
     if (events.name.toLowerCase().includes(palabras)) {
       eventoFiltrado.push(events);
     }
   });
-  pintarCards(eventoFiltrado);
+  return eventoFiltrado;
 }
 
-eventosPast(data.events);
-pintarCards(eventosFinal)
+//superFiltro(eventosFinal)
 /*-------------------pintar checks category-----------------*/
 
 let categorys = [];
@@ -65,7 +66,7 @@ function pintarChecks(checks) {
     let check = document.createElement("div");
     check.className = `form-check form-switch d-flex flex-wrap`;
     check.innerHTML = `<input class="form-check-input" type="checkbox" role="switch" 
-    id="${category.replace(" ", "-")}" value="${category.replace(" ", "-")}" 
+    id="${category.replace(" ", "-")}"  
     value="${category.replace(" ", "-")}">
     <label class="form-check-label" for="${category.replace(
       " ",
@@ -79,22 +80,32 @@ pintarChecks(checks);
 
 /*-------------------cards order by check category-----------------*/
 
-let switches = document.querySelector("form")
+let switches = document.querySelector("form");
 
-switches.addEventListener("click", ()=> filtrarPorCategoria(eventosFinal))
+switches.addEventListener("click", () => {
+  let filtroCategoria = filtrarPorCategoria(eventosFinal);
+  let filtradoTexto = search(filtroCategoria);
+  pintarCards(filtradoTexto);
+});
 
-
-function filtrarPorCategoria(eventosFinal){
-  let checkBoxes = document.querySelectorAll('input[type="checkbox"]')
-  let arrayCheckBoxes = Array.from(checkBoxes)
-  let valueCheck = arrayCheckBoxes.find(checkBox => checkBox.checked)  
-  let valueChecks = valueCheck.value
-  console.log(valueChecks)
-  let filtrados = eventosFinal.filter(valueChecks);
-  pintarCards(filtrados)
-  
-
-  } 
+function filtrarPorCategoria(events) {
+  let checkBoxes = document.querySelectorAll('input[type="checkbox"]');
+  let arrayCheckBoxes = Array.from(checkBoxes);
+  let inputCheckers = arrayCheckBoxes.filter((checkBox) => checkBox.checked);
+  let valueCheckers = inputCheckers.map((input) => input.value);
+  let filtro = [];
+  events.filter((event) => {
+    valueCheckers.forEach((category) => {
+      if (category == event.category.replace(" ", "-")) {
+        filtro.push(event);
+      }
+    });
+  });
+  if (filtro.length == 0) {
+    filtro = events;
+  }
+  return filtro;
+}
 
 /* let radioChecked = arrayRadioButtons.find(
     (radioButton) => radioButton.checked
@@ -114,10 +125,10 @@ checks.addEventListener("click", (evento)=>{filtrarPorCategoria(evento)
     //console.log(arrayCheckBoxes)
     console.log(checkBoxes)
   }*/
-  //let checked = []
-  //let checkBoxes = checks.value
-  
- /* for (let i = 0; i < checkBoxes.length; i++ ){
+//let checked = []
+//let checkBoxes = checks.value
+
+/* for (let i = 0; i < checkBoxes.length; i++ ){
    
     if (checkBoxes[i].cheked){
       checked.push(checkBoxes[i].value)

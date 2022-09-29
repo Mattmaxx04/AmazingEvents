@@ -36,26 +36,25 @@ function eventosPast(events) {
     }
   });
 }
-/*-------------------funcion de busqueda-----------------*/
 
+/*--------------search old----------
 let searcher = document.getElementById("searchbox");
 
 searcher.addEventListener("keyup", () => {
-  let filtroCategoria = filtrarPorCategoria(eventosFinal);
-  let filtradoTexto = search(filtroCategoria);
-  pintarCards(filtradoTexto);
+  search(eventosFinal)
 });
 
-function search(events) {
-  let palabras = searcher.value.toLowerCase();
+function search(events){
+    let palabras = searcher.value.toLowerCase();
   let eventoFiltrado = [];
   events.filter((events) => {
     if (events.name.toLowerCase().includes(palabras)) {
       eventoFiltrado.push(events);
     }
   });
-  return eventoFiltrado;
-}
+  pintarCards(eventoFiltrado);
+}*/
+
 
 if (url == "Home") {
   eventosFinal = data.events;
@@ -95,34 +94,5 @@ function pintarChecks(checks) {
 
 if (url == "Home" || url == "Past Events" || url == "Upcoming Events") {
   pintarChecks(checks);
-}
-
-/*-------------------cards order by check category-----------------*/
-
-let switches = document.querySelector("form");
-
-switches.addEventListener("click", () => {
-  let filtroCategoria = filtrarPorCategoria(eventosFinal);
-  let filtradoTexto = search(filtroCategoria);
-  pintarCards(filtradoTexto);
-});
-
-function filtrarPorCategoria(events) {
-  let checkBoxes = document.querySelectorAll('input[type="checkbox"]');
-  let arrayCheckBoxes = Array.from(checkBoxes);
-  let inputCheckers = arrayCheckBoxes.filter((checkBox) => checkBox.checked);
-  let valueCheckers = inputCheckers.map((input) => input.value);
-  let filtro = [];
-  events.filter((event) => {
-    valueCheckers.forEach((category) => {
-      if (category == event.category.replace(" ", "-")) {
-        filtro.push(event);
-      }
-    });
-  });
-  if (filtro.length == 0) {
-    filtro = events;
-  }
-  return filtro;
 }
 
