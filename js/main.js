@@ -20,7 +20,7 @@ function pintarCards(events) {
     cards.appendChild(card);
   });
 }
-
+/*-------------------funciones filtrar por fecha-----------------*/
 function eventosUp(events) {
   events.filter((events) => {
     if (events.date < data.currentDate) {
@@ -36,14 +36,23 @@ function eventosPast(events) {
     }
   });
 }
+/*-------------------pintar on page-----------------*/
+if (url == "Home") {
+  eventosFinal = data.events;
+  pintarCards(eventosFinal);
+} else if (url == "Upcoming Events") {
+  eventosUp(data.events);
+  pintarCards(eventosFinal);
+} else if (url == "Past Events") {
+  eventosPast(data.events);
+  pintarCards(eventosFinal);
+}
 /*-------------------funcion de busqueda-----------------*/
 
 let searcher = document.getElementById("searchbox");
 
 searcher.addEventListener("keyup", () => {
-  let filtroCategoria = filtrarPorCategoria(eventosFinal);
-  let filtradoTexto = search(filtroCategoria);
-  pintarCards(filtradoTexto);
+  superFiltro()
 });
 
 function search(events) {
@@ -57,18 +66,10 @@ function search(events) {
   return eventoFiltrado;
 }
 
-if (url == "Home") {
-  eventosFinal = data.events;
-  pintarCards(eventosFinal);
-} else if (url == "Upcoming Events") {
-  eventosUp(data.events);
-  pintarCards(eventosFinal);
-} else if (url == "Past Events") {
-  eventosPast(data.events);
-  pintarCards(eventosFinal);
-}
 
-/*-------------------show category checks-----------------*/
+
+
+/*-------------------mostrar checkbox por categoria-----------------*/
 
 let categorys = [];
 let checks = document.getElementById("checks");
@@ -97,14 +98,12 @@ if (url == "Home" || url == "Past Events" || url == "Upcoming Events") {
   pintarChecks(checks);
 }
 
-/*-------------------cards order by check category-----------------*/
+/*-------------------filtro por checkbox-----------------*/
 
 let switches = document.querySelector("form");
 
 switches.addEventListener("click", () => {
-  let filtroCategoria = filtrarPorCategoria(eventosFinal);
-  let filtradoTexto = search(filtroCategoria);
-  pintarCards(filtradoTexto);
+  superFiltro()
 });
 
 function filtrarPorCategoria(events) {
@@ -125,4 +124,13 @@ function filtrarPorCategoria(events) {
   }
   return filtro;
 }
+/*-------------------Funcion super filtro-----------------*/
+function superFiltro(){
+  let filtroCategoria = filtrarPorCategoria(eventosFinal);
+  let filtradoTexto = search(filtroCategoria);
+  pintarCards(filtradoTexto);
+
+}
+
+
 
