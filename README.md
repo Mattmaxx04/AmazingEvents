@@ -6,9 +6,9 @@
 
 _Amazing Events._
 _Se realizan diferentes páginas solicitadas por el cliente. El sitio es totalmente responsive y dinámico._
-_Cuenta con un buscador por texto._
+_Cuenta con un buscador por texto, y un filtro por categoría mediante switchs, ambos funcionan en simultaneo._
 
- [![](assets/mdhl.png)]()
- [![](assets/mdhl1.png)]()
+ [![](assets/amazing1.png)]()
+ [![](assets/amazing2.png)]()
  
-*Podés visitar [MDHL](https://mdhl-online.netlify.app).*
+*Podés visitar [AmazingEvents](https://amazing-events-site.netlify.app).*
