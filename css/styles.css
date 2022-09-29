@@ -237,7 +237,9 @@ input {
 .cards__body {
   height: 50%;
 }
-
+.img__notfound{
+  object-fit: center;
+}
 .details {
   width: 60vw;
 }

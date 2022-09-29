@@ -9,15 +9,22 @@ window.addEventListener("scroll", () => {
   }
 })
 
-let url = document.title;
+
 /*-------------------cards-----------------*/
 let eventosFinal = [];
 
 let cards = document.getElementById("cards__data");
+let article = document.getElementById("notfound");
+let div = document.createElement("div") 
+function notFound(){  
+     
+  div.innerHTML = `<img src="./assets/notfound.png" class="img__notfound" alt="...">`;
+  article.appendChild(div);
+}
 
-function pintarCards(events) {
-  cards.innerHTML = "";
-  events.forEach((eventos) => {
+function pintarCards(events) { 
+  cards.innerHTML = "";   
+  events.forEach((eventos) => {    
     let card = document.createElement("div");
     card.className = "card";
     card.style.width = "21rem";
@@ -48,6 +55,8 @@ function eventosPast(events) {
   });
 }
 /*-------------------pintar on page-----------------*/
+let url = document.title;
+
 if (url == "Home") {
   eventosFinal = data.events;
   pintarCards(eventosFinal);
@@ -74,6 +83,7 @@ function search(events) {
       eventoFiltrado.push(events);
     }
   });
+  
   return eventoFiltrado;
 }
 
@@ -130,7 +140,7 @@ function filtrarPorCategoria(events) {
       }
     });
   });
-  if (filtro.length == 0) {
+  if (!filtro.length) {
     filtro = events;
   }
   return filtro;
@@ -138,10 +148,23 @@ function filtrarPorCategoria(events) {
 /*-------------------Funcion super filtro-----------------*/
 function superFiltro(){
   let filtroCategoria = filtrarPorCategoria(eventosFinal);
-  let filtradoTexto = search(filtroCategoria);
-  pintarCards(filtradoTexto);
+  let filtradoTexto = search(filtroCategoria); 
+  if (!filtradoTexto.length){
+    notFound()
+  }
+  pintarCards(filtradoTexto)
 
 }
+/*
+function notFound(events){
+if (!events.length) {  
+  div.innerHTML ="";
+  let div = document.createElement("div")    
+  div.innerHTML = `<img src="./assets/notfound.png" class="img__notfound" alt="...">`;
+  article.appendChild(div);
+}
+}*/
+
 
 
 
