@@ -2,7 +2,7 @@
 
 
 
-[![](assets/amazing.svg)]()
+[![](assets/amazinge.svg)]()
 
 _Amazing Events._
 _Se realizan diferentes páginas solicitadas por el cliente. El sitio es totalmente responsive y dinámico._
