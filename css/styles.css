@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 :root {
   --color1: #d9077a;
   --color2: #f280bf;
@@ -36,9 +37,11 @@ main {
   justify-content: space-evenly !important;
   align-items: center !important;
 }
+
 header {
   height: 10%;
 }
+
 .navbar {
   border-radius: var(--border-radius);
   background-color: var(--color5);
@@ -48,6 +51,7 @@ header {
 span {
   background-color: var(--color1);
 }
+
 .navbar-nav {
   font-family: var(--font-family2);
   width: 40%;
@@ -74,51 +78,62 @@ label {
 .contact__main {
   height: 83vh;
 }
+
 .btn {
   margin: 1rem;
 }
+
 .card {
   border-radius: var(--border-radius);
   background-color: var(--color6);
   color: var(--color2);
   border: 0.1rem solid var(--color1);
 }
+
 .card-img-top {
   padding: 0.5rem;
   width: 100%;
   height: 100% !important;
   border-radius: var(--border-radius);
 }
+
 .card-text {
   color: var(--color3);
   font-family: var(--font-family1);
 }
+
 .card-title {
   font-family: var(--font-family2);
   font-weight: 600;
   font-size: 1.5rem;
 }
+
 .btn {
   background-color: var(--color4);
   color: var(--color3);
   border: 0.1rem solid var(--color1);
   border-radius: var(--border-radius);
 }
+
 .btn:hover {
   background-color: var(--color2);
   color: var(--color6);
   border: 0.1rem solid var(--color1);
 }
+
 .slide {
   height: 18vh;
   width: 100%;
   margin-top: 0.5rem;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem #dee1d8);
+
 }
 
-.carousel-item > img {
+.carousel-item>img {
   border-radius: var(--border-radius);
   object-position: center;
-  object-fit: center;
+  object-fit: contain;
+
 }
 
 section {
@@ -132,26 +147,42 @@ section {
   gap: 0.5rem;
   align-items: center;
 }
+
 .d-flex {
   padding-top: 1.5rem;
   justify-content: space-between;
   align-items: center;
 }
+
 .upmain {
   min-height: 80vh;
 }
+
 #checks {
   display: flex;
   margin: 1rem;
 }
-.form-check {
+
+.form-contact {
+  width: 100%;
   align-items: center;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+.name{
+  font-size: 1rem;
+}
+.form-label{
+  font-size: 1rem;
 }
 .form-check-label {
+  
   padding: 0.5rem;
 }
-.contact__form > div {
+
+.contact__form>div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -168,12 +199,15 @@ section {
 .bi {
   color: var(--color2);
 }
+
 .bi:hover {
   color: var(--color1);
 }
+
 form {
   width: 100%;
 }
+
 .btn__footer {
   background-color: var(--color6);
   color: var(--color2);
@@ -187,10 +221,12 @@ form {
   border-radius: var(--border-radius);
   border: 0.1rem solid var(--color1);
 }
+
 .btn__footer:hover {
   background-color: var(--color3);
   color: var(--color6);
 }
+
 .contact__form {
   height: 100%;
   display: flex;
@@ -205,20 +241,22 @@ form {
 label {
   font-size: 3rem;
 }
+
 input {
   width: 50%;
   height: 3rem;
 }
 
 #contact-message {
-  width: 50%;
+  width: 75%;
   height: 6rem;
 }
 
 .field {
-  width: 50%;
+  width: 75%;
   height: 3rem;
 }
+
 .cards {
   margin: 1rem;
   display: flex;
@@ -234,35 +272,50 @@ input {
 .card__image {
   height: 50% !important;
 }
+
 .cards__body {
   height: 50%;
 }
-.img__notfound{
+.home{
+  min-height: 75vh;
+}
+.img__notfound {
   object-fit: center;
 }
+
 .details {
   width: 60vw;
 }
+
 .detail__p {
   margin: 0.5rem;
 }
+
 .main__details {
-  min-height: 70vh;
+  min-height: 75vh;
 }
+
+.notFound {
+  display: flex;
+  justify-content: center;
+}
+
 .detail__card {
   display: flex;
   padding: 1rem;
   flex-wrap: wrap;
 }
+
 .detail__image {
   width: 100%;
   object-fit: cover;
   border-radius: var(--border-radius);
   border: 0.1rem solid var(--color1);
 }
+
 .contact__art {
   background-color: var(--color6);
-  width: 80%;
+  width: 90%;
   height: 80%;
 }
 
@@ -271,31 +324,32 @@ input {
 }
 
 /* up Button */
-.btnup{
-  position:fixed;
-  width:60px;
-  height:60px;
-  bottom:40px;
-  right:2.5rem;
-  color:var(--gold1);
-  border-radius:50px;
-  text-align:center;
-  font-size:60px;
-  z-index:100;
-  opacity:0;
+.btnup {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 2.5rem;
+  color: var(--gold1);
+  border-radius: 50px;
+  text-align: center;
+  font-size: 60px;
+  z-index: 100;
+  opacity: 0;
   pointer-events: none;
   transition: all .4s;
 }
 
 .btnup.active {
-  bottom:32px;
+  bottom: 32px;
   pointer-events: auto;
-  opacity:1;
+  opacity: 1;
 }
 
-.my-btnup{
-  margin-top:16px;
+.my-btnup {
+  margin-top: 16px;
 }
+
 footer {
   color: var(--color3);
   margin-top: 0.5rem;
@@ -313,12 +367,15 @@ footer {
   gap: 0.5rem;
   flex-wrap: wrap;
 }
+
 .checkbox_label {
   font-size: 2rem;
 }
+
 .checkbox {
   width: 2rem;
 }
+
 .container {
   width: 100%;
   display: flex;
@@ -340,9 +397,11 @@ footer {
   width: 100%;
   padding: 1rem;
 }
+
 .bi {
   font-size: 2rem;
 }
+
 h2 {
   color: var(--color2);
   font-size: 3rem;
@@ -356,13 +415,16 @@ td {
   text-align: center;
   border: 2px solid var(--color2);
 }
+
 td {
   height: 4rem;
 }
+
 th {
   color: var(--color3);
   font-size: 2rem;
 }
+
 table {
   background-color: var(--color6);
   table-layout: fixed;
@@ -381,4 +443,29 @@ thead th:nth-child(2) {
 
 thead th:nth-child(3) {
   width: 30%;
+}
+
+@media (max-width: 500px) {
+
+  body{
+    margin: 0;
+  }
+  main{
+    min-height: 80%;
+  }
+  .contact__section{
+    height: 90%;
+  }
+  .contact__art{
+    min-height: 100%;
+  }
+  .btn__footer{
+    font-size: 0.5rem;
+  }
+  h4{
+    font-size: 1rem;
+  }
+  footer{
+    margin: 0;
+  }
 }

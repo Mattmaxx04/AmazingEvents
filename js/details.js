@@ -8,9 +8,20 @@ let eventoFiltrado = data.events.filter((events) => {
 
 let eventoEncontrado = eventoFiltrado.find((events) => events._id == id);
 console.log(eventoEncontrado);
+
 showCard(eventoEncontrado);
 
 function showCard(events) {
+  let people = assistanceOrEstimate();
+
+  function assistanceOrEstimate() {
+    if (events.assistance == undefined) {
+      return `Estimate: ${events.estimate}`;
+    } else {
+      return `Assistance: ${events.assistance}`;
+    }
+  }
+  console.log(people);
   let container = document.getElementById("details");
   container.innerHTML = "";
   let div = document.createElement("div");
@@ -29,6 +40,7 @@ function showCard(events) {
         <p class="card-text detail__p">Date: ${events.date}</p>
         <p class="card-text detail__p">Place: ${events.place}</p>
         <p class="card-text detail__p">Capacity: ${events.capacity}</p>
+        <p class="card-text detail__p">${people}</p>
         <h4 class="price">Price: $${events.price}</p>
       </div>
     </div>

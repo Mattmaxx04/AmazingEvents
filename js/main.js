@@ -8,23 +8,27 @@ window.addEventListener("scroll", () => {
     toTop.classList.remove("active");
   }
 })
-
-
 /*-------------------cards-----------------*/
 let eventosFinal = [];
 
 let cards = document.getElementById("cards__data");
 let article = document.getElementById("notfound");
 let div = document.createElement("div") 
+
 function notFound(){  
-     
+  div.className = "notFound"
   div.innerHTML = `<img src="./assets/notfound.png" class="img__notfound" alt="...">`;
   article.appendChild(div);
 }
 
-function pintarCards(events) { 
+function pintarCards(events) {   
   cards.innerHTML = "";   
-  events.forEach((eventos) => {    
+  if (!events.length){
+    notFound()
+  }else{  
+    div.innerHTML = ""
+    events.forEach((eventos) => {   
+     
     let card = document.createElement("div");
     card.className = "card";
     card.style.width = "21rem";
@@ -36,7 +40,9 @@ function pintarCards(events) {
       <a href="./details.html?_id=${eventos._id}" class="btn btn-primary">More info</a>
     </div>`;
     cards.appendChild(card);
+
   });
+}
 }
 /*-------------------funciones filtrar por fecha-----------------*/
 function eventosUp(events) {
@@ -149,22 +155,9 @@ function filtrarPorCategoria(events) {
 function superFiltro(){
   let filtroCategoria = filtrarPorCategoria(eventosFinal);
   let filtradoTexto = search(filtroCategoria); 
-  if (!filtradoTexto.length){
-    notFound()
-  }
+  
   pintarCards(filtradoTexto)
 
 }
-/*
-function notFound(events){
-if (!events.length) {  
-  div.innerHTML ="";
-  let div = document.createElement("div")    
-  div.innerHTML = `<img src="./assets/notfound.png" class="img__notfound" alt="...">`;
-  article.appendChild(div);
-}
-}*/
-
-
 
 
