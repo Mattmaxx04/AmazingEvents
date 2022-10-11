@@ -10,6 +10,8 @@ window.addEventListener("scroll", () => {
 })
 /*-------------------cards-----------------*/
 let eventosFinal = [];
+const URI = "https://amazing-events.herokuapp.com/api/events";
+traerDatos(URI);
 
 let cards = document.getElementById("cards__data");
 let article = document.getElementById("notfound");
@@ -45,34 +47,28 @@ function pintarCards(events) {
 }
 }
 /*-------------------funciones filtrar por fecha-----------------*/
-function eventosUp(events) {
-  events.filter((events) => {
-    if (events.date < data.currentDate) {
-      eventosFinal.push(events);
-    }
-  });
-}
 
-function eventosPast(events) {
-  events.filter((events) => {
-    if (events.date > data.currentDate) {
-      eventosFinal.push(events);
-    }
-  });
-}
+
+  
 /*-------------------pintar on page-----------------*/
-let url = document.title;
-
-if (url == "Home") {
-  eventosFinal = data.events;
-  pintarCards(eventosFinal);
-} else if (url == "Upcoming Events") {
-  eventosUp(data.events);
-  pintarCards(eventosFinal);
-} else if (url == "Past Events") {
-  eventosPast(data.events);
-  pintarCards(eventosFinal);
+function traerDatos(url) {
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      eventosFinal = data.events;
+      if (document.title == "Home") {
+        eventosFinal = data.events
+      } else if (document.title == "Upcoming Events") {
+        eventosFinal = eventosFinal.filter(event => event.date >= data.currentDate);    
+      } else if(document.title == "Past Events") {
+        eventosFinal = eventosFinal.filter(event => event.date < data.currentDate);        
+      }
+      pintarChecks(eventosFinal)
+      pintarCards(eventosFinal)
+    });
 }
+
+
 /*-------------------funcion de busqueda-----------------*/
 
 let searcher = document.getElementById("searchbox");
@@ -101,8 +97,8 @@ function search(events) {
 let categorys = [];
 let checks = document.getElementById("checks");
 
-function pintarChecks(checks) {
-  data.events.forEach((category) => {
+function pintarChecks(events) {
+  events.forEach((category) => {
     if (!categorys.includes(category.category)) {
       categorys.push(category.category);
     }
@@ -121,9 +117,6 @@ function pintarChecks(checks) {
   });
 }
 
-if (url == "Home" || url == "Past Events" || url == "Upcoming Events") {
-  pintarChecks(checks);
-}
 
 /*-------------------filtro por checkbox-----------------*/
 
