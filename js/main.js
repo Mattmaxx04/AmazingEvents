@@ -60,10 +60,28 @@ function traerDatos(url) {
         (event) => event.date < data.currentDate
       );
       if (document.title == "Home") {
+        searcher.addEventListener("keyup", () => {
+          superFiltro();
+        });
+        switches.addEventListener("click", () => {
+          superFiltro();
+        });
         eventosFinal = data.events;
       } else if (document.title == "Upcoming Events") {
+        searcher.addEventListener("keyup", () => {
+          superFiltro();
+        });
+        switches.addEventListener("click", () => {
+          superFiltro();
+        });
         eventosFinal = eventosUp;
       } else if (document.title == "Past Events") {
+        searcher.addEventListener("keyup", () => {
+          superFiltro();
+        });
+        switches.addEventListener("click", () => {
+          superFiltro();
+        });
         eventosFinal = eventosPast;
       } else if (document.title == "Details") {
         let parametrosUrl = location.search;
@@ -100,9 +118,7 @@ function traerDatos(url) {
 
 let searcher = document.getElementById("searchbox");
 
-searcher.addEventListener("keyup", () => {
-  superFiltro();
-});
+
 
 function search(events) {
   let palabras = searcher.value.toLowerCase();
@@ -145,9 +161,7 @@ function pintarChecks(events) {
 
 let switches = document.querySelector("form");
 
-switches.addEventListener("click", () => {
-  superFiltro();
-});
+
 
 function filtrarPorCategoria(events) {
   let checkBoxes = document.querySelectorAll('input[type="checkbox"]');
@@ -333,14 +347,13 @@ function juntarArrays(events) {
   let revenues = sacarRevenues(events);
   let eventHighest = highest(events);
   let arrayFusionado = [];
-  for (let i = 0; i < categoriaFiltrada.length; i++) {
+  categoriaFiltrada.forEach((events, i=categoriaFiltrada.length,categoriaFiltrada)=>{
     arrayFusionado[i] = {
       category: categoriaFiltrada[i],
       revenue: revenues[i],
       percentage: eventHighest[i],
     };
-  }
-
+  }) 
   return arrayFusionado;
 }
 
