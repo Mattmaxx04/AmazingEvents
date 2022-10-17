@@ -19,7 +19,7 @@
 
 body {
   background-color: var(--color6);
-  margin: 1rem;
+  margin: 0rem;
 }
 
 main {
@@ -30,6 +30,10 @@ main {
   flex-direction: column;
   background-color: var(--color5);
   border: 0.1rem solid var(--color1);
+}
+
+.stats__main {
+  min-height: 80vh;
 }
 
 .container-fluid {
@@ -77,6 +81,27 @@ label {
 
 .contact__main {
   height: 83vh;
+}
+
+/*-----------contact sweet alert-------*/
+.swal2-popup {
+  background: var(--color5)!important;
+}
+
+.swal2-title {
+  background: var(--color5);
+}
+
+.swal2-success-circular-line-right{
+  background-color: var(--color5);
+}
+
+.swal2-success-circular-line-left {
+  background-color: var(--color5);
+}
+
+.swal2-success-fix {
+  background: var(--color5);
 }
 
 .btn {
@@ -171,14 +196,16 @@ section {
 }
 
 
-.name{
+.name {
   font-size: 1rem;
 }
-.form-label{
+
+.form-label {
   font-size: 1rem;
 }
+
 .form-check-label {
-  
+
   padding: 0.5rem;
 }
 
@@ -261,6 +288,7 @@ input {
   margin: 1rem;
   display: flex;
   gap: 1rem;
+  justify-content: center;
 }
 
 .card__img {
@@ -276,9 +304,11 @@ input {
 .cards__body {
   height: 50%;
 }
-.home{
+
+.home {
   min-height: 75vh;
 }
+
 .img__notfound {
   object-fit: center;
 }
@@ -316,7 +346,8 @@ input {
 .contact__art {
   background-color: var(--color6);
   width: 90%;
-  height: 80%;
+  height: 90%;
+  border-radius: var(--border-radius);
 }
 
 .contact__section {
@@ -406,6 +437,8 @@ h2 {
   color: var(--color2);
   font-size: 3rem;
   padding: 0.5rem;
+  text-align: center;
+  background: #344e41;
 }
 
 th,
@@ -417,12 +450,15 @@ td {
 }
 
 td {
+  color: var(--color3);
   height: 4rem;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 th {
-  color: var(--color3);
-  font-size: 2rem;
+  color: var(--color2);
+  font-size: 1.2rem;
 }
 
 table {
@@ -444,28 +480,42 @@ thead th:nth-child(2) {
 thead th:nth-child(3) {
   width: 30%;
 }
-
-@media (max-width: 500px) {
-
-  body{
-    margin: 0;
-  }
-  main{
-    min-height: 80%;
-  }
-  .contact__section{
-    height: 90%;
-  }
-  .contact__art{
-    min-height: 100%;
-  }
-  .btn__footer{
+@media (max-width: 576px){
+  .btn{
+    margin:0.1rem;
     font-size: 0.5rem;
   }
+  h2{
+    font-size: 1.5rem;
+  }
   h4{
+    font-size: 1.2rem;
+  }
+  th{
+    font-size: 0.6rem;
+  }
+  td{
+    font-size: 0.6rem;
+  }
+  .bi {
     font-size: 1rem;
-  }
-  footer{
-    margin: 0;
-  }
+}
+ .btn__footer{
+  font-size: 0.6rem;
+ }
+ .container{
+  border-radius: 0;
+  margin-top: 0;
+  padding: 0.3rem;
+ }
+ main{
+  border-radius: 0;
+  margin-top: 0;
+ }
+ .navbar{
+  border-radius: 0;
+ }
+ footer{
+  border-radius: 0;
+ }
 }
