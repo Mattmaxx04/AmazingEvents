@@ -1,5 +1,7 @@
 /*-------------------btn to top-----------------*/
 const toTop = document.querySelector(".btnup");
+let tableTwo = document.getElementById("table2");
+let tableThree = document.getElementById("table3");
 
 window.addEventListener("scroll", () => {
   if (window.pageYOffset > 100) {
@@ -8,7 +10,7 @@ window.addEventListener("scroll", () => {
     toTop.classList.remove("active");
   }
 });
-/*-------------------cards-----------------*/
+/*-------------------pintar cards-----------------*/
 let eventosFinal = [];
 const URI = "https://amazing-events.herokuapp.com/api/events";
 traerDatos(URI);
@@ -51,30 +53,43 @@ function traerDatos(url) {
     .then((response) => response.json())
     .then((data) => {
       eventosFinal = data.events;
+      eventosUp = eventosFinal.filter(
+        (event) => event.date >= data.currentDate
+      );
+      eventosPast = eventosFinal.filter(
+        (event) => event.date < data.currentDate
+      );
       if (document.title == "Home") {
         eventosFinal = data.events;
       } else if (document.title == "Upcoming Events") {
-        eventosFinal = eventosFinal.filter(
-          (event) => event.date >= data.currentDate
-        );
+        eventosFinal = eventosUp;
       } else if (document.title == "Past Events") {
-        eventosFinal = eventosFinal.filter(
-          (event) => event.date < data.currentDate
-        );
+        eventosFinal = eventosPast;
       } else if (document.title == "Details") {
         let parametrosUrl = location.search;
         let parametros = new URLSearchParams(parametrosUrl);
         let id = parametros.get("_id");
-        let eventoFiltrado = eventosFinal.filter(events => {
+        let eventoFiltrado = eventosFinal.filter((events) => {
           return events._id;
         });
         let eventoEncontrado = eventoFiltrado.find(
           (events) => events._id == id
         );
-
-      showCard(eventoEncontrado);
-      }else if(document.title == "Stats"){
-        showTable()
+        showCard(eventoEncontrado);
+      } else if (document.title == "Stats") {
+        showTableOne(eventosFinal);
+        showTable(eventosUp, tableTwo);
+        showTable(eventosPast, tableThree);
+      } else if (document.title == "Contact") {
+        const contactForm = document.querySelector("#formulario");
+        const enviarForm = (evento) => {
+          evento.preventDefault();
+          new swal("Thankyou!", "You message has been sent!", "success");
+          document.forms[0][0].value = ""
+          document.forms[0][1].value = ""
+          document.forms[0][2].value = ""
+        };
+        contactForm.addEventListener("submit", enviarForm);
       }
       pintarChecks(eventosFinal);
       pintarCards(eventosFinal);
@@ -198,25 +213,49 @@ function showCard(events) {
   container.appendChild(div);
 }
 
+/*--------------FuncTionS table ONE-----------------*/
 
-/*--------------Funcion table-----------------*/
-let eventHighest;
-let eventLowest;
-let eventLarger;
-let categories;
-let revenues;
-let percentage;
-let pastCategories;
-let pastRevenues;
-let pastPercentage;
-
-
-function showTable(){
-  let table = document.getElementById("stats");
-  table.innerHTML = ""
+/*--------------Function highest all-----------------*/
+function highestAll(events) {
+  let eventosAssistance = events.filter((event) => event.assistance);
+  let eventHighestall = eventosAssistance.sort((a, b) => {
+    return (
+      (parseInt(b.assistance) * 100) / parseInt(b.capacity) -
+      (parseInt(a.assistance) * 100) / parseInt(a.capacity)
+    );
+  });
+  return [eventHighestall[0].name, eventHighestall[0]._id];
+}
+/*--------------Function lowest all-----------------*/
+function lowestAll(events) {
+  let eventosAssistance = events.filter((event) => event.assistance);
+  let eventLowest = eventosAssistance.sort((a, b) => {
+    return (
+      (parseInt(a.assistance) * 100) / parseInt(a.capacity) -
+      (parseInt(b.assistance) * 100) / parseInt(b.capacity)
+    );
+  });
+  return [eventLowest[0].name, eventLowest[0]._id];
+}
+/*--------------Function larger capacity-----------------*/
+function largerCapacity(events) {
+  let eventCapacity = events.sort((a, b) => {
+    return parseInt(b.capacity) - parseInt(a.capacity);
+  });
+  return [eventCapacity[0].name, eventCapacity[0]._id];
+}
+/*--------------Function showtableone-----------------*/
+function showTableOne(event) {
+  let highestElement = highestAll(event);
+  let lowestElement = lowestAll(event);
+  let largerCapacityElement = largerCapacity(event);
+  let table = document.getElementById("table1");
+  table.innerHTML = "";
   let tableBody = document.createElement("table");
-  div.className = "table";
-  tableBody.innerHTML=`<thead>
+  table.className = "table";
+  tableBody.innerHTML = `
+  
+  <thead>
   <tr>
     <th scope="col">Event with the highest percentage of attendance</th>
  
@@ -227,111 +266,95 @@ function showTable(){
 </thead>
 <tbody>
   <tr>
-    <td>${eventHighest}</td>
-    <td>${eventLowest}</td>
-    <td>${eventLarger}</td>
+    <td>
+    <a href="./details.html?_id=${highestElement[1]}" class="btn btn-primary">${highestElement[0]}</a>
+    </td>
+    <td>
+    <a href="./details.html?_id=${lowestElement[1]}" class="btn btn-primary">${lowestElement[0]}</a>
+    </td>
+    <td>
+    <a href="./details.html?_id=${largerCapacityElement[1]}" class="btn btn-primary">${largerCapacityElement[0]}</a>
+    </td>    
   </tr>            
 </tbody>
 </table>
-<h2>Upcoming Events Statistic by category </h2>
-<table class="tg">
-<thead>
-  <tr>
-    <th scope="col">Categories</th>
-  
-    <th scope="col">Revenues</th>
-  
-    <th scope="col">Percentage of attendance</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>${categories}</td>
-    <td>${revenues}</td>
-    <td>${percentage}</td>
-  </tr>            
-</tbody>
-</table>
-<h2>Past Events Statistic by category </h2>
-<table class="tg">
-
-<thead>
-  <tr>
-    <th scope="col">Categories</th>
-  
-    <th scope="col">Revenues</th>
-  
-    <th scope="col">Percentage of attendance</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>${pastCategories}</td>
-    <td>${pastRevenues}</td>
-    <td>${pastPercentage}</td>
-  </tr>            
-</tbody>
-  `
-  table.appendChild(tableBody);  
+  `;
+  table.appendChild(tableBody);
+}
+/*--------------FuncTionS table 2 and 3-----------------*/
+/*----------filtrar categorias------------------*/
+function filtroCategorias(events) {
+  let categoryStats = [];
+  events.forEach((event) => categoryStats.push(event.category));
+  let unificados = Array.from(new Set(categoryStats));
+  return unificados;
+}
+/*----------sacar revenues up------------------*/
+function sacarRevenues(events) {
+  let categoriaFiltrada = filtroCategorias(events);
+  let revenues = [];
+  categoriaFiltrada.forEach((category) => {
+    let filtrados = events
+      .filter((evento) => evento.category == category)
+      .map((event) => (event.estimate || event.assistance) * event.price)
+      .reduce((precio1, precio2) => {
+        return precio1 + precio2;
+      });
+    revenues.push(filtrados);
+  });
+  return revenues;
 }
 
-/* 
-<thead>
-            <tr>
-              <th scope="col">Events with the highest percentage of attendance</th>
-           
-              <th scope="col">Events with the lowest percentage of attendance</th>
-            
-              <th scope="col">Events with larger capacity</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td> </td>
-              <td></td>
-              <td></td>
-            </tr>            
-          </tbody>
-        </table>
-        <h2>Upcoming Events Statistic by category </h2>
-        <table class="tg">
-          
-          <thead>
-            <tr>
-              <th scope="col">Categories</th>
-            
-              <th scope="col">Revenues</th>
-            
-              <th scope="col">Percentage of attendance</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>            
-          </tbody>
-        </table>
-        <h2>Past Events Statistic by category </h2>
-        <table class="tg">
-          
-          <thead>
-            <tr>
-              <th scope="col">Categories</th>
-            
-              <th scope="col">Revenues</th>
-            
-              <th scope="col">Percentage of attendance</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>            
-          </tbody>
-        
-          */
+/*----------sacar highest percentage------------------*/
+function highest(events) {
+  let categoriaFiltrada = filtroCategorias(events);
+  let eventHighest = [];
+  categoriaFiltrada.forEach((category) => {
+    let filtrados = events.filter((evento) => evento.category == category);
+    /*funca hasta aca*/
+    let nuevo = filtrados.map(
+      (event) =>
+        (parseInt(event.estimate || event.assistance) * 100) /
+        parseInt(event.capacity) /
+        filtrados.length
+    );
 
+    let otro = nuevo.reduce((precio1, precio2) => {
+      return precio1 + precio2;
+    });
+
+    eventHighest.push(otro.toFixed(2));
+  });
+  return eventHighest;
+}
+
+function juntarArrays(events) {
+  let categoriaFiltrada = filtroCategorias(events);
+  let revenues = sacarRevenues(events);
+  let eventHighest = highest(events);
+  let arrayFusionado = [];
+  for (let i = 0; i < categoriaFiltrada.length; i++) {
+    arrayFusionado[i] = {
+      category: categoriaFiltrada[i],
+      revenue: revenues[i],
+      percentage: eventHighest[i],
+    };
+  }
+
+  return arrayFusionado;
+}
+
+function showTable(events, container) {
+  let arrayFinal = juntarArrays(events);
+  console.log(arrayFinal);
+  arrayFinal.forEach((eventos) => {
+    let tr = document.createElement("tr");
+    tr.className = "tg";
+    tr.innerHTML = `
+    <td><q>${eventos.category}</q></td>
+    <td>$${eventos.revenue.toLocaleString()}</td>
+    <td>%${eventos.percentage}</td>
+  `;
+    container.appendChild(tr);
+  });
+}
